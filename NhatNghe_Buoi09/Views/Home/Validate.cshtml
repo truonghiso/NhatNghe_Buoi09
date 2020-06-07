@@ -1,0 +1,172 @@
+﻿
+@{
+    ViewData["Title"] = "Validate";
+}
+
+<form id="formDK">
+    <h2 class="text-center text-danger">
+        Đăng ký Thành viên
+    </h2>
+    <div class="row m-1">
+        <div class="col-4 col-md-3 text-right">Mã sinh viên</div>
+        <div class="col-8 col-md-9">
+            <input name="MaSV" placeholder="Mã sinh viên" class="w-100" />
+        </div>
+    </div>
+    <div class="row m-1">
+        <div class="col-4 col-md-3 text-right">Họ tên</div>
+        <div class="col-8 col-md-9">
+            <input name="HoTen" placeholder="Họ tên Sinh viên" class="w-100" />
+        </div>
+    </div>
+    <div class="row m-1">
+        <div class="col-4 col-md-3 text-right">Ngày sinh</div>
+        <div class="col-8 col-md-9">
+            <input name="NgaySinh" class="w-100" />
+        </div>
+    </div>
+    <div class="row m-1">
+        <div class="col-4 col-md-3 text-right">Email</div>
+        <div class="col-8 col-md-9">
+            <input name="Email" placeholder="Email" class="w-100" />
+        </div>
+    </div>
+    <div class="row m-1">
+        <div class="col-4 col-md-3 text-right">Xác nhận email</div>
+        <div class="col-8 col-md-9">
+            <input name="XacNhanEmail" placeholder="Xác nhận email" class="w-100" />
+        </div>
+    </div>
+    <div class="row m-1">
+        <div class="col-4 col-md-3 text-right">Số tài khoản</div>
+        <div class="col-8 col-md-9">
+            <input name="SoTaiKhoan" placeholder="Số tài khoản" class="w-100" />
+        </div>
+    </div>
+    <div class="row m-1">
+        <div class="col-4 col-md-3 text-right">Hình</div>
+        <div class="col-8 col-md-9">
+            <input type="file" name="Hinh" />
+        </div>
+    </div>
+    <div class="row m-1">
+        <div class="col-4 col-md-3 text-right">Điểm</div>
+        <div class="col-8 col-md-9">
+            <input name="Diem" placeholder="Điểm" class="w-100" />
+        </div>
+    </div>
+    <div class="row m-1">
+        <div class="col-4 col-md-3 text-right">Hệ số</div>
+        <div class="col-8 col-md-9">
+            <input name="HeSo" placeholder="Hệ số" class="w-100" />
+        </div>
+    </div>
+    <div class="row m-1">
+        <div class="col-4 col-md-3 text-right">Mã bảo mật</div>
+        <div class="col-8 col-md-9">
+            <span></span>
+            <input name="MaBaoMat" placeholder="Mã bảo mật" class="w-100" />
+        </div>
+    </div>
+    <div class="row m-1">
+        <div class="col-4 col-md-3 text-right">Thông tin thêm</div>
+        <div class="col-8 col-md-9">
+            <textarea name="ThongTinThem" class="w-100"></textarea>
+        </div>
+    </div>
+    <div class="row m-1">
+        <div class="col-4 col-md-3 text-right"></div>
+        <div class="col-8 col-md-9">
+            <button class="btn btn-success">Đăng ký</button>
+            <button class="btn btn-danger" type="reset">Nhập lại</button>
+        </div>
+    </div>
+</form>
+
+@section Scripts{
+    <script src="~/lib/jquery/dist/jquery.js"></script>
+    <script src="~/lib/jquery-validation/dist/jquery.validate.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.js"></script>
+    <script src="~/lib/jquery-validation/dist/additional-methods.js"></script>
+
+    <script>
+        $(function () {
+            $("#formDK").validate({
+
+                rules:
+                {
+                    MaSV:
+                    {
+                        required: true,
+                        minlength: 6,
+                        maxlength: 15
+                    },
+                    HoTen:
+                    {
+                        required: true,
+                        minlength: 6,
+                        maxlength: 25
+                    },
+                    NgaySinh: { date: true },
+                    Email: { required: true, email: true },
+                    XacNhanEmail: { equalTo:" input[name='Email']" },
+                    SoTaiKhoan: { creditcard: true },
+                    Hinh: { extension: "gif|png|jpg" },
+                    Diem: { number: true, range: [0, 10] },
+                    HeSo: { digits: true, min: 1 }
+
+                },
+
+                messages:
+                {
+                    MaSV:
+                    {
+                        required: "*",
+                        minlength: "Tối thiểu 6 ký tự",
+                        maxlength: "Tối đa 15 ký tự"
+                    },
+                    HoTen:
+                    {
+                        required: "*",
+                        minlength: "Tối thiểu 6 ký tự",
+                        maxlength: "Tối đa 25 ký tự"
+                    },
+                    NgaySinh:
+                    {
+                        required: "Nhập số tuổi"
+                    },
+                    Email:
+                    {
+                        required: "Nhập địa chỉ email"
+                    },
+                    XacNhanEmail:
+                    {
+                        equalTo: "Email không khớp !!!"
+                    },
+                    SoTaiKhoan:
+                    {
+                        creditcard: "Không thuộc dãy số Creditcard !!!"
+                    },
+                    Hinh:
+                    {
+                        extension: "Chưa có hình hoặc file này không được hỗ trợ "
+                    },
+                    Diem:
+                    {
+                        number: "Hãy nhập số thực",
+                        range: "Điểm từ 0 đến 10"
+                    },
+                    HeSo:
+                    {
+                        digits: "Hãy nhập số nguyên",
+                        min: "Tối thiểu là 1"
+                    }
+                }
+            });
+        });
+    </script>
+
+}
+
+
+

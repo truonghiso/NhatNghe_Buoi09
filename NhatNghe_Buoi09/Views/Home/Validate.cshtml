@@ -90,6 +90,15 @@
     <script src="~/lib/jquery-validation/dist/additional-methods.js"></script>
 
     <script>
+        //Định nghĩa hàm kt email:
+        function kiemtraemail(value, element) {
+            let parttern = "/^[a-z]{2,}@@[a-z]{2,}(.[a - z]{2,6})+$/g";
+            return pattern.test(value) || this.option(element);
+        }
+
+        //Bước 2: thêm vào jquery validate:
+        $.validator.addMethod("emailCorrect", kiemtraemail, "Chưa đúng định dạng email");
+
         $(function () {
             $("#formDK").validate({
 
@@ -108,7 +117,7 @@
                         maxlength: 25
                     },
                     NgaySinh: { date: true },
-                    Email: { required: true, email: true },
+                    Email: { required: true, email: true, emailCorrect: true },
                     XacNhanEmail: { equalTo:" input[name='Email']" },
                     SoTaiKhoan: { creditcard: true },
                     Hinh: { extension: "gif|png|jpg" },
